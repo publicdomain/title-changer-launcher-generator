@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.4
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleChangerLauncherGenerator", "TitleChangerLauncherGenerator\TitleChangerLauncherGenerator.csproj", "{5B5119D1-358C-4F9F-BE17-AC80C1B583AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B5119D1-358C-4F9F-BE17-AC80C1B583AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B5119D1-358C-4F9F-BE17-AC80C1B583AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B5119D1-358C-4F9F-BE17-AC80C1B583AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B5119D1-358C-4F9F-BE17-AC80C1B583AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+EndGlobal
