@@ -122,7 +122,8 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnGenerateRadioButtonCheckedChanged(object sender, EventArgs e)
         {
-            // TODO Add code.
+            // Set generate button text
+            this.SetGenerateButtonText();
         }
 
         /// <summary>
