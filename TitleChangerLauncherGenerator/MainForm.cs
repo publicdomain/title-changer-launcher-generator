@@ -134,5 +134,14 @@ namespace TitleChangerLauncherGenerator
         {
             // TODO Add code.
         }
+
+        /// <summary>
+        /// Sets the generate button text.
+        /// </summary>
+        private void SetGenerateButtonText()
+        {
+            // Set accounting for in-place checkbox
+            this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
+        }
     }
 }
