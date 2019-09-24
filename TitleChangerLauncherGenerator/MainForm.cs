@@ -152,6 +152,9 @@ namespace TitleChangerLauncherGenerator
         {
             // Set accounting for in-place checkbox
             this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
+
+            // Set color to red
+            this.generateRevertButton.ForeColor = Color.Red;
         }
     }
 }
