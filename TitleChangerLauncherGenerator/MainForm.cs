@@ -132,7 +132,12 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnInPlaceCheckBoxCheckedChanged(object sender, EventArgs e)
         {
-            // TODO Add code.
+            // Check if generate radio button is checked
+            if (this.generateRadioButton.Checked)
+            {
+                // Set generate button text
+                this.SetGenerateButtonText();
+            }
         }
 
         /// <summary>
