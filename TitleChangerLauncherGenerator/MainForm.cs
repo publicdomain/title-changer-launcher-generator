@@ -112,7 +112,11 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnRevertRadioButtonCheckedChanged(object sender, EventArgs e)
         {
-            // TODO Add code.
+            // Set revert button text
+            this.generateRevertButton.Text = "&Revert to original state";
+
+            // Set color to blue
+            this.generateRevertButton.ForeColor = Color.Blue;
         }
 
         /// <summary>
