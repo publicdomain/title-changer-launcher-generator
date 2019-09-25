@@ -53,9 +53,7 @@ namespace TitleChangerLauncherGenerator
         	this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
         	this.browseButton = new System.Windows.Forms.Button();
         	this.programLabel = new System.Windows.Forms.Label();
-        	this.previousTitleLabel = new System.Windows.Forms.Label();
         	this.newTitleLabel = new System.Windows.Forms.Label();
-        	this.previousTitleTextBox = new System.Windows.Forms.TextBox();
         	this.newTiTLeTextBox = new System.Windows.Forms.TextBox();
         	this.generateLauncherTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
         	this.generateRevertButton = new System.Windows.Forms.Button();
@@ -75,7 +73,7 @@ namespace TitleChangerLauncherGenerator
         	// 
         	this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
         	        	        	this.mainToolStripStatusLabel});
-        	this.mainStatusStrip.Location = new System.Drawing.Point(0, 164);
+        	this.mainStatusStrip.Location = new System.Drawing.Point(0, 132);
         	this.mainStatusStrip.Name = "mainStatusStrip";
         	this.mainStatusStrip.Size = new System.Drawing.Size(308, 22);
         	this.mainStatusStrip.TabIndex = 0;
@@ -185,21 +183,18 @@ namespace TitleChangerLauncherGenerator
         	this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.76624F));
         	this.mainTableLayoutPanel.Controls.Add(this.browseButton, 1, 0);
         	this.mainTableLayoutPanel.Controls.Add(this.programLabel, 0, 0);
-        	this.mainTableLayoutPanel.Controls.Add(this.previousTitleLabel, 0, 1);
-        	this.mainTableLayoutPanel.Controls.Add(this.newTitleLabel, 0, 2);
-        	this.mainTableLayoutPanel.Controls.Add(this.previousTitleTextBox, 1, 1);
-        	this.mainTableLayoutPanel.Controls.Add(this.newTiTLeTextBox, 1, 2);
-        	this.mainTableLayoutPanel.Controls.Add(this.generateLauncherTableLayoutPanel, 0, 3);
+        	this.mainTableLayoutPanel.Controls.Add(this.newTitleLabel, 0, 1);
+        	this.mainTableLayoutPanel.Controls.Add(this.newTiTLeTextBox, 1, 1);
+        	this.mainTableLayoutPanel.Controls.Add(this.generateLauncherTableLayoutPanel, 0, 2);
         	this.mainTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.mainTableLayoutPanel.Location = new System.Drawing.Point(0, 24);
         	this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
-        	this.mainTableLayoutPanel.RowCount = 5;
-        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-        	this.mainTableLayoutPanel.Size = new System.Drawing.Size(308, 140);
+        	this.mainTableLayoutPanel.RowCount = 4;
+        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+        	this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+        	this.mainTableLayoutPanel.Size = new System.Drawing.Size(308, 108);
         	this.mainTableLayoutPanel.TabIndex = 2;
         	// 
         	// browseButton
@@ -208,7 +203,7 @@ namespace TitleChangerLauncherGenerator
         	this.browseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         	this.browseButton.Location = new System.Drawing.Point(129, 3);
         	this.browseButton.Name = "browseButton";
-        	this.browseButton.Size = new System.Drawing.Size(176, 22);
+        	this.browseButton.Size = new System.Drawing.Size(176, 21);
         	this.browseButton.TabIndex = 0;
         	this.browseButton.Text = "Browse for target";
         	this.browseButton.UseVisualStyleBackColor = true;
@@ -220,46 +215,26 @@ namespace TitleChangerLauncherGenerator
         	this.programLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         	this.programLabel.Location = new System.Drawing.Point(3, 0);
         	this.programLabel.Name = "programLabel";
-        	this.programLabel.Size = new System.Drawing.Size(120, 28);
+        	this.programLabel.Size = new System.Drawing.Size(120, 27);
         	this.programLabel.TabIndex = 1;
         	this.programLabel.Text = "Program:";
         	this.programLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        	// 
-        	// previousTitleLabel
-        	// 
-        	this.previousTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.previousTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        	this.previousTitleLabel.Location = new System.Drawing.Point(3, 28);
-        	this.previousTitleLabel.Name = "previousTitleLabel";
-        	this.previousTitleLabel.Size = new System.Drawing.Size(120, 28);
-        	this.previousTitleLabel.TabIndex = 2;
-        	this.previousTitleLabel.Text = "Previous title:";
-        	this.previousTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         	// 
         	// newTitleLabel
         	// 
         	this.newTitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.newTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        	this.newTitleLabel.Location = new System.Drawing.Point(3, 56);
+        	this.newTitleLabel.Location = new System.Drawing.Point(3, 27);
         	this.newTitleLabel.Name = "newTitleLabel";
-        	this.newTitleLabel.Size = new System.Drawing.Size(120, 28);
+        	this.newTitleLabel.Size = new System.Drawing.Size(120, 27);
         	this.newTitleLabel.TabIndex = 3;
         	this.newTitleLabel.Text = "New title:";
         	this.newTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         	// 
-        	// previousTitleTextBox
-        	// 
-        	this.previousTitleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.previousTitleTextBox.Location = new System.Drawing.Point(129, 31);
-        	this.previousTitleTextBox.Name = "previousTitleTextBox";
-        	this.previousTitleTextBox.Size = new System.Drawing.Size(176, 20);
-        	this.previousTitleTextBox.TabIndex = 4;
-        	this.previousTitleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        	// 
         	// newTiTLeTextBox
         	// 
         	this.newTiTLeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.newTiTLeTextBox.Location = new System.Drawing.Point(129, 59);
+        	this.newTiTLeTextBox.Location = new System.Drawing.Point(129, 30);
         	this.newTiTLeTextBox.Name = "newTiTLeTextBox";
         	this.newTiTLeTextBox.Size = new System.Drawing.Size(176, 20);
         	this.newTiTLeTextBox.TabIndex = 5;
@@ -275,14 +250,14 @@ namespace TitleChangerLauncherGenerator
         	this.generateLauncherTableLayoutPanel.Controls.Add(this.generateRevertButton, 1, 1);
         	this.generateLauncherTableLayoutPanel.Controls.Add(this.radioTableLayoutPanel, 1, 0);
         	this.generateLauncherTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.generateLauncherTableLayoutPanel.Location = new System.Drawing.Point(0, 84);
+        	this.generateLauncherTableLayoutPanel.Location = new System.Drawing.Point(0, 54);
         	this.generateLauncherTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
         	this.generateLauncherTableLayoutPanel.Name = "generateLauncherTableLayoutPanel";
         	this.generateLauncherTableLayoutPanel.RowCount = 2;
         	this.mainTableLayoutPanel.SetRowSpan(this.generateLauncherTableLayoutPanel, 2);
         	this.generateLauncherTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
         	this.generateLauncherTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-        	this.generateLauncherTableLayoutPanel.Size = new System.Drawing.Size(308, 56);
+        	this.generateLauncherTableLayoutPanel.Size = new System.Drawing.Size(308, 54);
         	this.generateLauncherTableLayoutPanel.TabIndex = 6;
         	// 
         	// generateRevertButton
@@ -292,7 +267,7 @@ namespace TitleChangerLauncherGenerator
         	this.generateRevertButton.ForeColor = System.Drawing.Color.Red;
         	this.generateRevertButton.Location = new System.Drawing.Point(49, 23);
         	this.generateRevertButton.Name = "generateRevertButton";
-        	this.generateRevertButton.Size = new System.Drawing.Size(209, 30);
+        	this.generateRevertButton.Size = new System.Drawing.Size(209, 28);
         	this.generateRevertButton.TabIndex = 0;
         	this.generateRevertButton.Text = "&Generate in-place Launcher";
         	this.generateRevertButton.UseVisualStyleBackColor = true;
@@ -365,7 +340,7 @@ namespace TitleChangerLauncherGenerator
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        	this.ClientSize = new System.Drawing.Size(308, 186);
+        	this.ClientSize = new System.Drawing.Size(308, 154);
         	this.Controls.Add(this.mainTableLayoutPanel);
         	this.Controls.Add(this.mainStatusStrip);
         	this.Controls.Add(this.mainMenuStrip);
@@ -396,9 +371,7 @@ namespace TitleChangerLauncherGenerator
         private System.Windows.Forms.Button generateRevertButton;
         private System.Windows.Forms.TableLayoutPanel generateLauncherTableLayoutPanel;
         private System.Windows.Forms.TextBox newTiTLeTextBox;
-        private System.Windows.Forms.TextBox previousTitleTextBox;
         private System.Windows.Forms.Label newTitleLabel;
-        private System.Windows.Forms.Label previousTitleLabel;
         private System.Windows.Forms.Label programLabel;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.TableLayoutPanel mainTableLayoutPanel;

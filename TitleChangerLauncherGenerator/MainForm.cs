@@ -10,6 +10,7 @@ namespace TitleChangerLauncherGenerator
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     /// <summary>
@@ -32,6 +33,42 @@ namespace TitleChangerLauncherGenerator
         }
 
         /// <summary>
+        /// Finds the window.
+        /// </summary>
+        /// <returns>The window.</returns>
+        /// <param name="className">Class name.</param>
+        /// <param name="windowName">Window name.</param>
+        [DllImport("user32.dll", EntryPoint = "FindWindow")]
+        public static extern IntPtr FindWindow(string className, string windowName);
+
+        /// <summary>
+        /// Sets the window text.
+        /// </summary>
+        /// <returns><c>true</c>, if window text was set, <c>false</c> otherwise.</returns>
+        /// <param name="hwnd">The Hwnd.</param>
+        /// <param name="longPointerToString">Long pointer to string. Instead of lpString, for stylecop.</param>
+        [DllImport("user32.dll", EntryPoint = "SetWindowText")]
+        public static extern bool SetWindowText(IntPtr hwnd, string longPointerToString);
+
+        /// <summary>
+        /// Handles the generate/revert button click event.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">Event arguments.</param>
+        private void OnGenerateRevertButtonClick(object sender, EventArgs e)
+        {
+            // Check there's a target file name
+            if (this.targetFileName.Length == 0)
+            {
+                // Advise user
+                MessageBox.Show("Please set target program's executable file!", "Target program missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Halt flow
+                return;
+            }
+        }
+
+        /// <summary>
         /// Handles the new tool strip menu item click event.
         /// </summary>
         /// <param name="sender">Sender object.</param>
@@ -42,7 +79,6 @@ namespace TitleChangerLauncherGenerator
             this.targetFileName = string.Empty;
 
             // Clear text boxes
-            this.previousTitleTextBox.Clear();
             this.newTiTLeTextBox.Clear();
 
             // Check in place check box
@@ -89,16 +125,6 @@ namespace TitleChangerLauncherGenerator
                 // Set target file name
                 this.targetFileName = this.openFileDialog.FileName;
             }
-        }
-
-        /// <summary>
-        /// Handles the generate/revert button click event.
-        /// </summary>
-        /// <param name="sender">Sender object.</param>
-        /// <param name="e">Event arguments.</param>
-        private void OnGenerateRevertButtonClick(object sender, EventArgs e)
-        {
-            // TODO Add code.
         }
 
         /// <summary>
