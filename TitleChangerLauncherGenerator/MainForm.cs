@@ -38,7 +38,21 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code.
+            // Clear target file name
+            this.targetFileName = string.Empty;
+
+            // Clear text boxes
+            this.previousTitleTextBox.Clear();
+            this.newTiTLeTextBox.Clear();
+
+            // Check in place check box
+            this.inPlaceCheckBox.Checked = true;
+
+            // Check generate radio button
+            this.generateRadioButton.Checked = true;
+
+            // Reset status
+            this.mainToolStripStatusLabel.Text = "1) Set target, previous and new title. 2) Generate!";
         }
 
         /// <summary>
