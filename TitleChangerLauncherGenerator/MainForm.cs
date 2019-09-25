@@ -24,6 +24,153 @@ namespace TitleChangerLauncherGenerator
         private string targetFileName = string.Empty;
 
         /// <summary>
+        /// The launcher code.
+        /// </summary>
+        private string[] launcherCode = new string[]
+        {
+            @"// Directives
+            using System;
+            using System.Diagnostics;
+            using System.Runtime.InteropServices;
+            using System.Text;
+            using System.Windows.Forms;
+
+            /// <summary>
+            /// Title changer.
+            /// </summary>
+            public class TitleChanger
+            {
+                /// <summary>
+                /// The title timer.
+                /// </summary>
+                static System.Windows.Forms.Timer titleTimer = new System.Windows.Forms.Timer();
+
+                /// <summary>
+                /// The exit flag.
+                /// </summary>
+                static bool exitFlag = false;
+
+                /// <summary>
+                /// The process.
+                /// </summary>
+                static Process process = null;
+
+                /// <summary>
+                /// The tick counter.
+                /// </summary>
+                static int tickCounter = 0;
+
+                /// <summary>
+                /// The name of the target file.
+                /// </summary>
+                static readonly string targetFileName = Encoding.UTF8.GetString(Convert.FromBase64String(""[|>ENCODED-FILE-NAME<|]""));
+
+                /// <summary>
+                /// The new title.
+                /// </summary>
+                static readonly string newTitle = Encoding.UTF8.GetString(Convert.FromBase64String(""[|>ENCODED-NEW-TITLE<|]""));
+
+                /// <summary>
+                /// Sets the window text.
+                /// </summary>
+                /// <returns><c>true</c>, if window text was set, <c>false</c> otherwise.</returns>
+                /// <param name=""hwnd"">The Hwnd.</param>
+                /// <param name=""longPointerToString"">Long pointer to string.</param>
+                [DllImport(""user32.dll"", EntryPoint = ""SetWindowText"")]
+                public static extern bool SetWindowText(IntPtr hwnd, String longPointerToString);
+
+                /// <summary>
+                /// Handles the title timer tick event.
+                /// </summary>
+                /// <param name=""sender"">Sender object.</param>
+                /// <param name=""eventArgs"">Event arguments.</param>
+                private static void TitleTimerTick(object sender, EventArgs eventArgs)
+                {
+                    // Counter erratic ticks
+                    if (exitFlag)
+                    {
+                        // Exit function
+                        return;
+                    }
+
+                    // Rise the tick counter
+                    tickCounter++;
+
+                    // Try to get the window handle.
+                    if (process.MainWindowHandle != IntPtr.Zero)
+                    {
+                        // Set title text
+                        if (SetWindowText(process.MainWindowHandle, newTitle))
+                        {
+                            // Close the program on sucess
+                            StopTimerAndExit();
+                        }
+                    }
+
+                    // Check for 2 minutes worth of ticks
+                    if (tickCounter == 12000)
+                    {
+                        // Halt program flow
+                        StopTimerAndExit();
+                    }
+                }
+
+                /// <summary>
+                /// Stops the timer and exit.
+                /// </summary>
+                private static void StopTimerAndExit()
+                {
+                    // Stop title timer
+                    titleTimer.Stop();
+
+                    // Set flag to terminate main program loop
+                    exitFlag = true;
+                }
+
+                /// <summary>
+                /// The entry point of the program, where the program control starts and ends.
+                /// </summary>
+                /// <returns>The exit code that is given to the operating system after the program ends.</returns>
+                public static int Main()
+                {
+                    // Wrap to advise on program start error
+                    try
+                    {
+                        // Set process by running target program
+                        process = Process.Start(targetFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Advise user
+                        MessageBox.Show($""Could not run program {targetFileName}.{Environment.NewLine}{Environment.NewLine}Reason:{Environment.NewLine}{ex.Message}"", ""Process start error"", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        // Halt program
+                        return 0;
+                    }
+
+                    // Add title timer event handler
+                    titleTimer.Tick += new EventHandler(TitleTimerTick);
+
+                    // Set interval to 10 milliseconds for 100 ticks per second
+                    titleTimer.Interval = 10;
+
+                    // Start title timer
+                    titleTimer.Start();
+
+                    // Main program loop
+                    while (exitFlag == false)
+                    {
+                        // Process events
+                        Application.DoEvents();
+                    }
+
+                    // Exit program
+                    return 0;
+                }
+            }"
+        };
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:TitleChangerLauncherGenerator.MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -206,7 +353,7 @@ namespace TitleChangerLauncherGenerator
         private void SetGenerateButtonText()
         {
             // Set accounting for in-place checkbox
-            //this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
+            this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
 
             // Set color to red
             this.generateRevertButton.ForeColor = Color.Red;
