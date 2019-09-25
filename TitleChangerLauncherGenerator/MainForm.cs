@@ -358,5 +358,16 @@ namespace TitleChangerLauncherGenerator
             // Set color to red
             this.generateRevertButton.ForeColor = Color.Red;
         }
+
+        /// <summary>
+        /// Encodes input string using Base64.
+        /// </summary>
+        /// <returns>The encode.</returns>
+        /// <param name="inputString">Input string.</param>
+        private string Base64Encode(string inputString)
+        {
+            // Return encoded string
+            return Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(inputString));
+        }
     }
 }
