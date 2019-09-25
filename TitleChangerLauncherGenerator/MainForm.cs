@@ -19,9 +19,9 @@ namespace TitleChangerLauncherGenerator
     public partial class MainForm : Form
     {
         /// <summary>
-        /// The name of the target file.
+        /// The path of the target file.
         /// </summary>
-        private string targetFileName = string.Empty;
+        private string targetFilePath = string.Empty;
 
         /// <summary>
         /// The launcher code.
@@ -204,8 +204,8 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnGenerateRevertButtonClick(object sender, EventArgs e)
         {
-            // Check there's a target file name
-            if (this.targetFileName.Length == 0)
+            // Check there's a target file path
+            if (this.targetFilePath.Length == 0)
             {
                 // Advise user
                 MessageBox.Show("Please set target program's executable file!", "Target program missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -222,8 +222,8 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // Clear target file name
-            this.targetFileName = string.Empty;
+            // Clear target file path
+            this.targetFilePath = string.Empty;
 
             // Clear text boxes
             this.newTitleTextBox.Clear();
@@ -269,8 +269,8 @@ namespace TitleChangerLauncherGenerator
             // Show open file dialog
             if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Set target file name
-                this.targetFileName = this.openFileDialog.FileName;
+                // Set target file path
+                this.targetFilePath = this.openFileDialog.FileName;
             }
         }
 
