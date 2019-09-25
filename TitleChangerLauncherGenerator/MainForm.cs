@@ -18,6 +18,11 @@ namespace TitleChangerLauncherGenerator
     public partial class MainForm : Form
     {
         /// <summary>
+        /// The name of the target file.
+        /// </summary>
+        private string targetFileName = string.Empty;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:TitleChangerLauncherGenerator.MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -63,7 +68,12 @@ namespace TitleChangerLauncherGenerator
         /// <param name="e">Event arguments.</param>
         private void OnBrowseButtonClick(object sender, EventArgs e)
         {
-            // TODO Add code.
+            // Show open file dialog
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Set target file name
+                this.targetFileName = this.openFileDialog.FileName;
+            }
         }
 
         /// <summary>
