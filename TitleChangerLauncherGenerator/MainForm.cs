@@ -79,7 +79,7 @@ namespace TitleChangerLauncherGenerator
             this.targetFileName = string.Empty;
 
             // Clear text boxes
-            this.newTiTLeTextBox.Clear();
+            this.newTitleTextBox.Clear();
 
             // Check in place check box
             this.inPlaceCheckBox.Checked = true;
@@ -206,7 +206,7 @@ namespace TitleChangerLauncherGenerator
         private void SetGenerateButtonText()
         {
             // Set accounting for in-place checkbox
-            this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
+            //this.generateRevertButton.Text = $"&Generate{(this.inPlaceCheckBox.Checked ? " in-place " : " ")}Launcher";
 
             // Set color to red
             this.generateRevertButton.ForeColor = Color.Red;

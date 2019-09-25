@@ -54,7 +54,7 @@ namespace TitleChangerLauncherGenerator
         	this.browseButton = new System.Windows.Forms.Button();
         	this.programLabel = new System.Windows.Forms.Label();
         	this.newTitleLabel = new System.Windows.Forms.Label();
-        	this.newTiTLeTextBox = new System.Windows.Forms.TextBox();
+        	this.newTitleTextBox = new System.Windows.Forms.TextBox();
         	this.generateLauncherTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
         	this.generateRevertButton = new System.Windows.Forms.Button();
         	this.radioTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -184,7 +184,7 @@ namespace TitleChangerLauncherGenerator
         	this.mainTableLayoutPanel.Controls.Add(this.browseButton, 1, 0);
         	this.mainTableLayoutPanel.Controls.Add(this.programLabel, 0, 0);
         	this.mainTableLayoutPanel.Controls.Add(this.newTitleLabel, 0, 1);
-        	this.mainTableLayoutPanel.Controls.Add(this.newTiTLeTextBox, 1, 1);
+        	this.mainTableLayoutPanel.Controls.Add(this.newTitleTextBox, 1, 1);
         	this.mainTableLayoutPanel.Controls.Add(this.generateLauncherTableLayoutPanel, 0, 2);
         	this.mainTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
         	this.mainTableLayoutPanel.Location = new System.Drawing.Point(0, 24);
@@ -231,14 +231,14 @@ namespace TitleChangerLauncherGenerator
         	this.newTitleLabel.Text = "New title:";
         	this.newTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         	// 
-        	// newTiTLeTextBox
+        	// newTitleTextBox
         	// 
-        	this.newTiTLeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-        	this.newTiTLeTextBox.Location = new System.Drawing.Point(129, 30);
-        	this.newTiTLeTextBox.Name = "newTiTLeTextBox";
-        	this.newTiTLeTextBox.Size = new System.Drawing.Size(176, 20);
-        	this.newTiTLeTextBox.TabIndex = 5;
-        	this.newTiTLeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        	this.newTitleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.newTitleTextBox.Location = new System.Drawing.Point(129, 30);
+        	this.newTitleTextBox.Name = "newTitleTextBox";
+        	this.newTitleTextBox.Size = new System.Drawing.Size(176, 20);
+        	this.newTitleTextBox.TabIndex = 5;
+        	this.newTitleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         	// 
         	// generateLauncherTableLayoutPanel
         	// 
@@ -370,7 +370,7 @@ namespace TitleChangerLauncherGenerator
         private System.Windows.Forms.ToolStripMenuItem headquartersPatreoncomToolStripMenuItem;
         private System.Windows.Forms.Button generateRevertButton;
         private System.Windows.Forms.TableLayoutPanel generateLauncherTableLayoutPanel;
-        private System.Windows.Forms.TextBox newTiTLeTextBox;
+        private System.Windows.Forms.TextBox newTitleTextBox;
         private System.Windows.Forms.Label newTitleLabel;
         private System.Windows.Forms.Label programLabel;
         private System.Windows.Forms.Button browseButton;
