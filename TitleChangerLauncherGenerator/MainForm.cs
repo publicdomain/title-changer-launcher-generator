@@ -11,7 +11,6 @@ namespace TitleChangerLauncherGenerator
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using Microsoft.CSharp;
 
@@ -178,24 +177,6 @@ namespace TitleChangerLauncherGenerator
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Finds the window.
-        /// </summary>
-        /// <returns>The window.</returns>
-        /// <param name="className">Class name.</param>
-        /// <param name="windowName">Window name.</param>
-        [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        public static extern IntPtr FindWindow(string className, string windowName);
-
-        /// <summary>
-        /// Sets the window text.
-        /// </summary>
-        /// <returns><c>true</c>, if window text was set, <c>false</c> otherwise.</returns>
-        /// <param name="hwnd">The Hwnd.</param>
-        /// <param name="longPointerToString">Long pointer to string. Instead of lpString, for stylecop.</param>
-        [DllImport("user32.dll", EntryPoint = "SetWindowText")]
-        public static extern bool SetWindowText(IntPtr hwnd, string longPointerToString);
 
         /// <summary>
         /// Handles the generate/revert button click event.
