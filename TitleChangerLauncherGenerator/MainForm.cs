@@ -7,11 +7,13 @@ namespace TitleChangerLauncherGenerator
 {
     // Directives
     using System;
-    using System.Collections.Generic;
+    using System.CodeDom.Compiler;
     using System.Diagnostics;
     using System.Drawing;
+    using System.IO;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
+    using Microsoft.CSharp;
 
     /// <summary>
     /// Description of MainForm.
@@ -26,9 +28,8 @@ namespace TitleChangerLauncherGenerator
         /// <summary>
         /// The launcher code.
         /// </summary>
-        private string[] launcherCode = new string[]
-        {
-            @"// Directives
+        private string launcherCode = @"
+            // Directives
             using System;
             using System.Diagnostics;
             using System.Runtime.InteropServices;
@@ -142,7 +143,7 @@ namespace TitleChangerLauncherGenerator
                     catch (Exception ex)
                     {
                         // Advise user
-                        MessageBox.Show($""Could not run program {targetFileName}.{Environment.NewLine}{Environment.NewLine}Reason:{Environment.NewLine}{ex.Message}"", ""Process start error"", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(""Could not run program "" + targetFileName + ""."" + Environment.NewLine + Environment.NewLine + ""Reason:"" + Environment.NewLine + ex.Message, ""Process start error"", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         // Halt program
                         return 0;
@@ -167,8 +168,7 @@ namespace TitleChangerLauncherGenerator
                     // Exit program
                     return 0;
                 }
-            }"
-        };
+            }";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TitleChangerLauncherGenerator.MainForm"/> class.
@@ -212,6 +212,146 @@ namespace TitleChangerLauncherGenerator
 
                 // Halt flow
                 return;
+            }
+
+            // Set target file name without extension
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.targetFilePath);
+
+            // Check if the user picked an "-original" or "-launcher" file
+            if (fileNameWithoutExtension.EndsWith("-original", StringComparison.InvariantCulture) || fileNameWithoutExtension.EndsWith("-launcher", StringComparison.InvariantCulture))
+            {
+                // Fix target file path
+                this.targetFilePath = Path.Combine(Path.GetDirectoryName(this.targetFilePath), $"{fileNameWithoutExtension.Remove(fileNameWithoutExtension.Length - 9)}{Path.GetExtension(this.targetFilePath)}");
+
+                // Amend file name without extension to be used below
+                fileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.targetFilePath);
+            }
+
+            // Set file name with apended "-original"
+            string fileNameWithOriginal = $"{fileNameWithoutExtension}-original{Path.GetExtension(this.targetFilePath)}";
+
+            // Set file path with inserted "-original"
+            string filePathWithOriginal = Path.Combine(Path.GetDirectoryName(this.targetFilePath), fileNameWithOriginal);
+
+            // Wrap to advise on restore error
+            try
+            {
+                // Check for an "-original" file
+                if (File.Exists(filePathWithOriginal))
+                {
+                    // Delete target
+                    File.Delete(this.targetFilePath);
+
+                    // Rename original back to target
+                    File.Move(filePathWithOriginal, this.targetFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Update status
+                this.mainToolStripStatusLabel.Text = "Restore error. Please retry.";
+
+                // Advise user
+                MessageBox.Show($"Could not restore {fileNameWithoutExtension}.{Environment.NewLine}{Environment.NewLine}Reason:{Environment.NewLine}{ex.Message}", "Restore error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Check if must generate launcher
+            if (this.generateRadioButton.Checked)
+            {
+                // Wrap to advise on compilation error
+                try
+                {
+                    // Declare code provider
+                    CSharpCodeProvider codeProvider = new CSharpCodeProvider();
+
+                    // Declare compiler parameneters
+                    CompilerParameters compilerParameters = new CompilerParameters();
+
+                    // Update status
+                    this.mainToolStripStatusLabel.Text = "Generating...";
+
+                    // Add references
+                    compilerParameters.ReferencedAssemblies.Add("System.dll");
+                    compilerParameters.ReferencedAssemblies.Add("System.Windows.Forms.dll");
+
+                    // External file generation
+                    compilerParameters.GenerateInMemory = false;
+
+                    // Exe file generation
+                    compilerParameters.GenerateExecutable = true;
+
+                    // Do not treat warning as errors
+                    compilerParameters.TreatWarningsAsErrors = false;
+
+                    // Set extracted icon 
+                    Icon extractedIcon = Icon.ExtractAssociatedIcon(this.targetFilePath);
+
+                    // Create launcher icon
+                    using (FileStream fileStream = new FileStream("launcher.ico", FileMode.Create))
+                    {
+                        // Save icon file stream to disk
+                        extractedIcon.Save(fileStream);
+                    }
+
+                    // Declare target file name
+                    string targetFileName = string.Empty;
+
+                    // Declare output file name
+                    string outputFileName = string.Empty;
+
+                    // Check if must generate in-place
+                    if (this.inPlaceCheckBox.Checked)
+                    {
+                        // Set target file name (append "-original")
+                        targetFileName = $"{fileNameWithoutExtension}-original{Path.GetExtension(this.targetFilePath)}";
+
+                        // Set output file name based on initial path
+                        outputFileName = Path.GetFileName(this.targetFilePath);
+
+                        // Rename by appending "-original"
+                        File.Move(this.targetFilePath, Path.Combine(Path.GetDirectoryName(this.targetFilePath), targetFileName));
+                    }
+                    else
+                    {
+                        // Set target file name to the one in path
+                        targetFileName = Path.GetFileName(this.targetFilePath);
+
+                        // Set output file name (append "-launcher")
+                        outputFileName = $"{fileNameWithoutExtension}-launcher{Path.GetExtension(this.targetFilePath)}";
+                    }
+
+                    // Set output assembly
+                    compilerParameters.OutputAssembly = Path.Combine(Path.GetDirectoryName(this.targetFilePath), outputFileName);
+
+                    // Target windows executable, set program icon
+                    compilerParameters.CompilerOptions = "-target:winexe -win32icon:launcher.ico";
+
+                    // Declare replaced launcher code
+                    string replacedLauncherCode = this.launcherCode;
+
+                    // Replace file name
+                    replacedLauncherCode = replacedLauncherCode.Replace("[|>ENCODED-FILE-NAME<|]", this.Base64Encode(targetFileName));
+
+                    // Replace new title
+                    replacedLauncherCode = replacedLauncherCode.Replace("[|>ENCODED-NEW-TITLE<|]", this.Base64Encode(this.newTitleTextBox.Text));
+
+                    // Compile launcher
+                    CompilerResults compilerResults = codeProvider.CompileAssemblyFromSource(compilerParameters, new string[] { replacedLauncherCode });
+
+                    // Remove launcher icon
+                    File.Delete("launcher.ico");
+
+                    // Update status
+                    this.mainToolStripStatusLabel.Text = $"{(this.inPlaceCheckBox.Checked ? "In-place" : string.Empty)} Launcher generated!";
+                }
+                catch (Exception ex)
+                {
+                    // Update status
+                    this.mainToolStripStatusLabel.Text = "Error. Please retry.";
+
+                    // Advise user
+                    MessageBox.Show($"Could not generate launcher for {fileNameWithoutExtension}.{Environment.NewLine}{Environment.NewLine}Reason:{Environment.NewLine}{ex.Message}", "Launcher compilation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -293,7 +433,7 @@ namespace TitleChangerLauncherGenerator
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
             // Open GitHub
-            Process.Start("https://github.com/publicdomain//");
+            Process.Start("https://github.com/publicdomain/");
         }
 
         /// <summary>

@@ -204,7 +204,7 @@ namespace TitleChangerLauncherGenerator
         	this.browseButton.Location = new System.Drawing.Point(129, 3);
         	this.browseButton.Name = "browseButton";
         	this.browseButton.Size = new System.Drawing.Size(176, 21);
-        	this.browseButton.TabIndex = 0;
+        	this.browseButton.TabIndex = 1;
         	this.browseButton.Text = "Browse for target";
         	this.browseButton.UseVisualStyleBackColor = true;
         	this.browseButton.Click += new System.EventHandler(this.OnBrowseButtonClick);
@@ -216,8 +216,8 @@ namespace TitleChangerLauncherGenerator
         	this.programLabel.Location = new System.Drawing.Point(3, 0);
         	this.programLabel.Name = "programLabel";
         	this.programLabel.Size = new System.Drawing.Size(120, 27);
-        	this.programLabel.TabIndex = 1;
-        	this.programLabel.Text = "Program:";
+        	this.programLabel.TabIndex = 0;
+        	this.programLabel.Text = "&Program:";
         	this.programLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         	// 
         	// newTitleLabel
@@ -227,8 +227,8 @@ namespace TitleChangerLauncherGenerator
         	this.newTitleLabel.Location = new System.Drawing.Point(3, 27);
         	this.newTitleLabel.Name = "newTitleLabel";
         	this.newTitleLabel.Size = new System.Drawing.Size(120, 27);
-        	this.newTitleLabel.TabIndex = 3;
-        	this.newTitleLabel.Text = "New title:";
+        	this.newTitleLabel.TabIndex = 2;
+        	this.newTitleLabel.Text = "&New title:";
         	this.newTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         	// 
         	// newTitleTextBox
@@ -237,7 +237,7 @@ namespace TitleChangerLauncherGenerator
         	this.newTitleTextBox.Location = new System.Drawing.Point(129, 30);
         	this.newTitleTextBox.Name = "newTitleTextBox";
         	this.newTitleTextBox.Size = new System.Drawing.Size(176, 20);
-        	this.newTitleTextBox.TabIndex = 5;
+        	this.newTitleTextBox.TabIndex = 3;
         	this.newTitleTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         	// 
         	// generateLauncherTableLayoutPanel
@@ -268,7 +268,7 @@ namespace TitleChangerLauncherGenerator
         	this.generateRevertButton.Location = new System.Drawing.Point(49, 23);
         	this.generateRevertButton.Name = "generateRevertButton";
         	this.generateRevertButton.Size = new System.Drawing.Size(209, 28);
-        	this.generateRevertButton.TabIndex = 0;
+        	this.generateRevertButton.TabIndex = 4;
         	this.generateRevertButton.Text = "&Generate in-place Launcher";
         	this.generateRevertButton.UseVisualStyleBackColor = true;
         	this.generateRevertButton.Click += new System.EventHandler(this.OnGenerateRevertButtonClick);
@@ -299,7 +299,7 @@ namespace TitleChangerLauncherGenerator
         	this.generateRadioButton.Margin = new System.Windows.Forms.Padding(1);
         	this.generateRadioButton.Name = "generateRadioButton";
         	this.generateRadioButton.Size = new System.Drawing.Size(69, 18);
-        	this.generateRadioButton.TabIndex = 0;
+        	this.generateRadioButton.TabIndex = 5;
         	this.generateRadioButton.TabStop = true;
         	this.generateRadioButton.Text = "&Generate";
         	this.generateRadioButton.UseVisualStyleBackColor = true;
@@ -312,7 +312,7 @@ namespace TitleChangerLauncherGenerator
         	this.revertRadioButton.Margin = new System.Windows.Forms.Padding(1);
         	this.revertRadioButton.Name = "revertRadioButton";
         	this.revertRadioButton.Size = new System.Drawing.Size(69, 18);
-        	this.revertRadioButton.TabIndex = 1;
+        	this.revertRadioButton.TabIndex = 6;
         	this.revertRadioButton.Text = "&Revert";
         	this.revertRadioButton.UseVisualStyleBackColor = true;
         	this.revertRadioButton.CheckedChanged += new System.EventHandler(this.OnRevertRadioButtonCheckedChanged);
@@ -325,7 +325,7 @@ namespace TitleChangerLauncherGenerator
         	this.inPlaceCheckBox.Margin = new System.Windows.Forms.Padding(1);
         	this.inPlaceCheckBox.Name = "inPlaceCheckBox";
         	this.inPlaceCheckBox.Size = new System.Drawing.Size(71, 18);
-        	this.inPlaceCheckBox.TabIndex = 2;
+        	this.inPlaceCheckBox.TabIndex = 7;
         	this.inPlaceCheckBox.Text = "In-place";
         	this.inPlaceCheckBox.UseVisualStyleBackColor = true;
         	this.inPlaceCheckBox.CheckedChanged += new System.EventHandler(this.OnInPlaceCheckBoxCheckedChanged);
@@ -338,6 +338,7 @@ namespace TitleChangerLauncherGenerator
         	// 
         	// MainForm
         	// 
+        	this.AcceptButton = this.generateRevertButton;
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         	this.ClientSize = new System.Drawing.Size(308, 154);
