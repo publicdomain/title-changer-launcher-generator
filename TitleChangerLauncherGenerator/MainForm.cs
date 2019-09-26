@@ -208,13 +208,19 @@ namespace TitleChangerLauncherGenerator
                 fileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.targetFilePath);
             }
 
-            // Set file name with apended "-original"
+            // Set file name with appended "-original"
             string fileNameWithOriginal = $"{fileNameWithoutExtension}-original{Path.GetExtension(this.targetFilePath)}";
 
             // Set file path with inserted "-original"
             string filePathWithOriginal = Path.Combine(Path.GetDirectoryName(this.targetFilePath), fileNameWithOriginal);
 
-            // Wrap to advise on restore error
+            // Set file name with appended"-launcher"
+            string fileNameWithLauncher = $"{fileNameWithoutExtension}-launcher{Path.GetExtension(this.targetFilePath)}";
+
+            // Set file path with inserted "-launcher"
+            string filePathWithLauncher = Path.Combine(Path.GetDirectoryName(this.targetFilePath), fileNameWithLauncher);
+
+            // Wrap to advise on previous state restore error
             try
             {
                 // Check for an "-original" file
@@ -225,6 +231,13 @@ namespace TitleChangerLauncherGenerator
 
                     // Rename original back to target
                     File.Move(filePathWithOriginal, this.targetFilePath);
+                }
+
+                // Check for a "-launcher" file
+                if (File.Exists(filePathWithLauncher))
+                {
+                    // Delete launcher
+                    File.Delete(filePathWithLauncher);
                 }
             }
             catch (Exception ex)
@@ -297,8 +310,8 @@ namespace TitleChangerLauncherGenerator
                         // Set target file name to the one in path
                         targetFileName = Path.GetFileName(this.targetFilePath);
 
-                        // Set output file name (append "-launcher")
-                        outputFileName = $"{fileNameWithoutExtension}-launcher{Path.GetExtension(this.targetFilePath)}";
+                        // Set output file name ("-launcher")
+                        outputFileName = fileNameWithLauncher;
                     }
 
                     // Set output assembly
@@ -333,6 +346,11 @@ namespace TitleChangerLauncherGenerator
                     // Advise user
                     MessageBox.Show($"Could not generate launcher for {fileNameWithoutExtension}.{Environment.NewLine}{Environment.NewLine}Reason:{Environment.NewLine}{ex.Message}", "Launcher compilation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                // Update status
+                this.mainToolStripStatusLabel.Text = $"Reverted to initial state successfully.";
             }
         }
 
